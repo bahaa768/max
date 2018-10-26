@@ -1,0 +1,10 @@
+<div *ngIf="editMode else newRecipe">
+  <h3>Edit Recipe</h3>
+  <h4>Recipe Name: {{recipe.name}}</h4>
+  <h4>{{id}}</h4>
+</div>
+<ng-template #newRecipe>
+  <h4>make a new recipe</h4>
+</ng-template>
+
+
