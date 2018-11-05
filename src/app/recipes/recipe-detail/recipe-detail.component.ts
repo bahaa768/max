@@ -19,7 +19,13 @@ export class RecipeDetailComponent implements OnInit {
   id: number;
   constructor(private shoppingListService: ShoppingListService, private route: ActivatedRoute, private recipeService: RecipeService,
     private router: Router) {
-
+    this.route.params.subscribe(
+      (params: Params) => {
+        if (this.recipeService.getRecipe(+params['id']) === undefined) {
+          this.router.navigate(['recipes']);
+        }
+      }
+    );
   }
 
   ngOnInit() {

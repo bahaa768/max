@@ -1,9 +1,11 @@
 import { Ingredient } from './../shared/ingredient.model';
 import { Recipe } from './recipe.model';
+import { Subject } from 'rxjs';
 
 
 
 export class RecipeService {
+  public editMode = new Subject<boolean>();
   private recipes: Recipe[] = [
     new Recipe ('A Test Recipe1',
      'This is a simple test1',

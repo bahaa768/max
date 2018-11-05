@@ -1,10 +1,58 @@
-<div *ngIf="editMode else newRecipe">
-  <h3>Edit Recipe</h3>
-  <h4>Recipe Name: {{recipe.name}}</h4>
-  <h4>{{id}}</h4>
+<div class="row">
+  <div class="col-xs-12">
+    <form [formGroup]="recipeForm" #f (ngSubmit)="onSubmit()" >
+      <div class="row">
+        <div class="col-xs-12">
+          <button class="btn btn-success" type="submit" [disabled]="!recipeForm.valid || !recipeForm.dirty">Save</button>
+          <button class="btn btn-danger" type="button">Cancel</button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" class="form-control" formControlName="name">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <img src="" class="img-responsive">
+          <input type="text" class="form-control" formControlName="imagePath">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="description">Description</label>
+            <textarea type="Description" id="name" class="form-control" rows="6" formControlName="description"></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12" formArrayName="ingredients">
+          <div class="row"
+          *ngFor="let ingredientControl of recipeForm.get('ingredients').controls; let i = index"
+          [formGroupName]="i"
+          style="margin-top: 10px">
+            <div class="col-xs-8">
+                <input type="text" class="form-control" formControlName="name">
+            </div>
+            <div class="col-xs-2">
+                <input type="number" class="form-control" formControlName="amount">
+            </div>
+            <div class="col-xs-2">
+              <button class="btn btn-danger" type="button" (click)="onDelete(i)">X</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-xs-12">
+          <button type="button" class="btn btn-success" (click)="onAddIngredient()">Add Ingredient</button>
+        </div>
+      </div>
+    </form>
+  </div>
 </div>
-<ng-template #newRecipe>
-  <h4>make a new recipe</h4>
-</ng-template>
-
-
