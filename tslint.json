@@ -2,10 +2,15 @@
   "rulesDirectory": [
     "node_modules/codelyzer"
   ],
+  "extends": [
+    "rxjs-tslint-rules"
+  ],
   "rules": {
     "arrow-return-shorthand": true,
     "callable-types": true,
     "class-name": true,
+    "rxjs-add": { "severity": "error" },
+    "rxjs-no-unused-add": { "severity": "error" },
     "comment-format": [
       true,
       "check-space"

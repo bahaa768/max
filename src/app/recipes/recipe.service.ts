@@ -6,8 +6,9 @@ import { FormGroup } from '@angular/forms';
 
 
 export class RecipeService {
-  
-  editMode =true;
+
+  editMode = true;
+  recipesChanged = new Subject<Recipe[]>();
   reset = new Subject<boolean>();
   private recipes: Recipe[] = [
     new Recipe ('A Test Recipe1',
@@ -26,9 +27,27 @@ export class RecipeService {
   getRecipe(index: number) {
     return this.recipes[index];
   }
-  
+
   formReset (form: FormGroup) {
     form.reset();
   }
-  
+
+  addRecipe(name, description, imagePath, ingredients) {
+    const recipeToAdd = new Recipe(name, description, imagePath, ingredients);
+    this.recipes.push(recipeToAdd);
+    this.recipesChanged.next(this.getRecipes());
+  }
+
+  editRecipe (id, name, description, imagePath, ingredients) {
+    const recipeToEdit = new Recipe(name, description, imagePath, ingredients);
+    this.recipes[id] = recipeToEdit;
+    this.recipesChanged.next(this.getRecipes());
+
+  }
+
+  deleteRecipe(index: number) {
+    this.recipes.splice(index, 1);
+    this.recipesChanged.next(this.getRecipes());
+  }
+
 }

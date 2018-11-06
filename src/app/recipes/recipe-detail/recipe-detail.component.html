@@ -15,13 +15,13 @@
       <button type="button" class="btn btn-primary dropdown-toggle">Manage Recipe <span class="caret"></span></button>
       <ul class="dropdown-menu">
         <li>
-          <a (click) = "onToShoppingList()" style="cursor: pointer" routerLink="/shopping-list">to shopping list</a>
+          <a (click) = "onToShoppingList()" style="cursor: pointer">to shopping list</a>
         </li>
         <li>
           <a  style="cursor: pointer" (click)="onRecipeEdit()">Edit Recipe</a>
         </li>
         <li>
-          <a style="cursor: pointer" >Delete Recipe</a>
+          <a style="cursor: pointer" (click)="onRecipeDelete()" >Delete Recipe</a>
         </li>
       </ul>
     </div>
