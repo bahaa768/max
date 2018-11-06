@@ -1,7 +1,7 @@
 import { Ingredient } from './../shared/ingredient.model';
 import { ShoppingListService } from './shopping-list.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subject } from 'rxjs';
+
 
 @Component({
   selector: 'app-shopping-list',
@@ -32,4 +32,4 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
   onItemClicked(index: number) {
     this.shoppingListService.getIngredient(index);
   }
-  }
+}

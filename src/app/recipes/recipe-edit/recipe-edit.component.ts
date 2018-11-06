@@ -4,6 +4,7 @@ import { RecipeService } from './../recipe.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
+import { CompileShallowModuleMetadata } from '@angular/compiler';
 
 @Component({
   selector: 'app-recipe-edit',
@@ -12,52 +13,48 @@ import { FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
 })
 export class RecipeEditComponent implements OnInit {
 
-  @ViewChild ('f') recipeForm: FormGroup;
+  // @ViewChild ('f') 
+  recipeForm: FormGroup;
   id: number;
-  editMode = false;
+  editMode = true;
   recipe: Recipe;
   recipeIngredients = new FormArray([]);
-
+  path = this.route.snapshot.url[0].path
+  navigateAway;
   constructor(private recipeService: RecipeService, private route: ActivatedRoute, private router: Router) {
+    // to check if path is valid or not, if valid stay : navigate away to homepage
+    if (this.path === 'new' || this.recipeService.getRecipe(+this.path) !== undefined) {} else {this.router.navigate(['/recipes'])}}
 
-    this.recipeService.editMode.subscribe(
-      (edit: boolean) => {this.editMode = edit; }
-
-    );
-    // this.route.params.subscribe(
-    //   (params: Params) => {
-    //     if (params['id'] !== 'new' && this.recipeService.getRecipe(+params['id']) === undefined ) {
-    //        console.log('wrong id');
-    //        this.router.navigate(['/recipes']);
-    //     }
-    //   });
-  }
-
-  ngOnInit() {
-
-    if (this.editMode) {
-      this.route.params.subscribe(
-      (params: Params) => {
-        this.id = +params['id'];
-        this.recipe = this.recipeService.getRecipe(this.id);
-        for (const ingredient of this.recipe.ingredients) {
-          this.recipeIngredients.push(new FormGroup({
-            'name': new FormControl(ingredient.name, Validators.required),
-            'amount': new FormControl(ingredient.amount, [
-              Validators.required, Validators.pattern(/^[1-9][0-9]*$/)
-            ])
-          }));
-        }
-        this.initEditForm();
-      }
-    ); } else {
+  ngOnInit() {  
+    if (this.path === 'new' ) {
       this.initNewForm();
-    }
-
+      this.recipeService.reset.subscribe(
+        reset => reset ? this.recipeForm.reset() : null
+        )
+      console.log('new form initiated');
+    } else {
+      this.route.params.subscribe(
+        (params: Params) => {
+          this.id = +params['id'];
+          this.recipe = this.recipeService.getRecipe(this.id);
+          for (const ingredient of this.recipe.ingredients) {
+            this.recipeIngredients.push(new FormGroup({
+              'name': new FormControl(ingredient.name, Validators.required),
+              'amount': new FormControl(ingredient.amount, [
+                Validators.required, Validators.pattern(/^[1-9][0-9]*$/)
+              ])
+            }));
+          }
+          this.initEditForm();
+          console.log('edit form initiated'); 
+        }
+      ); 
+    } 
+      
   }
 
   onSubmit() {
-    console.log(this.recipeForm);
+    console.log(this.recipeForm.value);
   }
 
   onDelete(index: number) {
@@ -87,7 +84,7 @@ export class RecipeEditComponent implements OnInit {
       'name': new FormControl(null, Validators.required),
       'imagePath': new FormControl(null, Validators.required),
       'description': new FormControl(null, Validators.required),
-      'ingredients': this.recipeIngredients
+      'ingredients': new FormArray([])
 
     });
   }

@@ -1,11 +1,14 @@
 import { Ingredient } from './../shared/ingredient.model';
 import { Recipe } from './recipe.model';
 import { Subject } from 'rxjs';
+import { FormGroup } from '@angular/forms';
 
 
 
 export class RecipeService {
-  public editMode = new Subject<boolean>();
+  
+  editMode =true;
+  reset = new Subject<boolean>();
   private recipes: Recipe[] = [
     new Recipe ('A Test Recipe1',
      'This is a simple test1',
@@ -23,4 +26,9 @@ export class RecipeService {
   getRecipe(index: number) {
     return this.recipes[index];
   }
+  
+  formReset (form: FormGroup) {
+    form.reset();
+  }
+  
 }
