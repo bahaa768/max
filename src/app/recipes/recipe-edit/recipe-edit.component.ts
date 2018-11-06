@@ -64,6 +64,7 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
       this.recipeService.editRecipe(this.id, name, description, imagePath, ingredients);
     }
     this.recipeForm.reset();
+    this.router.navigate(['..'], {relativeTo: this.route});
   }
 
   onDelete(index: number) {
