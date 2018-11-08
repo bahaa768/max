@@ -68,7 +68,7 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
   }
 
   onDelete(index: number) {
-    (<FormArray>this.recipeForm.get('ingredients')).controls.splice(index, 1);
+    (<FormArray>this.recipeForm.get('ingredients')).removeAt(index);
     // console.log((<FormArray>this.recipeForm.get('ingredients')).controls);
   }
 

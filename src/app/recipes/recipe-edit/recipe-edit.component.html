@@ -19,9 +19,13 @@
       <div class="row">
         <div class="col-xs-12">
           <div class="form-group">
-            <img src="" class="img-responsive">
             <label for="imagePath">Image URL</label>
-            <input type="text" id="imagePath" class="form-control" formControlName="imagePath">
+            <input type="text" id="imagePath" class="form-control" formControlName="imagePath" #imagepath>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <img [src]="imagepath.value" class="img-responsive" style="width: 100%">
           </div>
         </div>
       </div>
