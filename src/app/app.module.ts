@@ -8,8 +8,6 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 
 
-
-
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { RecipesComponent } from './recipes/recipes.component';
@@ -22,6 +20,9 @@ import { DropdownDirective } from './shared/dropdown.directive';
 import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.component';
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 import { RecipeService } from './recipes/recipe.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AppMaterial2Module } from './app-material2.module';
+import { BhaaComponent } from './recipes/bhaa/bhaa.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,7 +35,9 @@ import { RecipeService } from './recipes/recipe.service';
     ShoppingEditComponent,
     DropdownDirective,
     RecipeStartComponent,
-    RecipeEditComponent
+    RecipeEditComponent,
+    BhaaComponent,
+
 
   ],
   imports: [
@@ -43,7 +46,10 @@ import { RecipeService } from './recipes/recipe.service';
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AppMaterial2Module,
+    BrowserAnimationsModule
+
   ],
   providers: [ShoppingListService, RecipeService],
   bootstrap: [AppComponent]
