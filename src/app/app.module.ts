@@ -22,9 +22,6 @@ import { DropdownDirective } from './shared/dropdown.directive';
 import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.component';
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 import { RecipeService } from './recipes/recipe.service';
-import { ButtonsModule } from 'ngx-bootstrap/buttons';
-import { ManageDropdownComponent } from './header/manage-dropdown/manage-dropdown.component';
-import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,7 +35,6 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
     DropdownDirective,
     RecipeStartComponent,
     RecipeEditComponent,
-    ManageDropdownComponent
 
 
   ],
@@ -49,8 +45,6 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     ReactiveFormsModule,
-    ButtonsModule.forRoot(),
-    BsDropdownModule.forRoot()
   ],
   providers: [ShoppingListService, RecipeService],
   bootstrap: [AppComponent]
